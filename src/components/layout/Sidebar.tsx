@@ -21,7 +21,9 @@ const NavItem: React.FC<NavItemProps> = ({ icon, label, href, active }) => (
     to={href}
     className={cn(
       "flex items-center space-x-3 px-4 py-3 rounded-md transition-colors",
-      active ? "bg-cuba-primary-light text-cuba-primary font-medium" : "text-gray-600 hover:bg-gray-100"
+      active 
+        ? "bg-cuba-primary-light text-cuba-primary dark:bg-cuba-primary/20 dark:text-cuba-primary font-medium" 
+        : "text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
     )}
   >
     {icon}
@@ -42,10 +44,10 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
       
       {/* Sidebar */}
       <aside className={cn(
-        "fixed top-0 left-0 z-50 h-full w-64 bg-white shadow-cuba transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:z-0",
+        "fixed top-0 left-0 z-50 h-full w-64 bg-white dark:bg-[#1d1e26] dark:border-r dark:border-gray-700 shadow-cuba transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:z-0",
         isOpen ? "translate-x-0" : "-translate-x-full"
       )}>
-        <div className="flex items-center justify-between h-16 px-4 border-b">
+        <div className="flex items-center justify-between h-16 px-4 border-b dark:border-gray-700">
           <Link to="/" className="flex items-center space-x-2">
             <div className="w-8 h-8 rounded bg-cuba-gradient flex items-center justify-center">
               <span className="text-white font-bold">C</span>
@@ -54,9 +56,9 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
           </Link>
           <button 
             onClick={onClose} 
-            className="p-1 rounded-full hover:bg-gray-100 lg:hidden"
+            className="p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 lg:hidden"
           >
-            <X className="h-5 w-5" />
+            <X className="h-5 w-5 dark:text-gray-300" />
           </button>
         </div>
         
@@ -65,12 +67,13 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
             icon={<LayoutDashboard className="h-5 w-5" />}
             label="Dashboard"
             href="/"
-            active={true}
+            active={window.location.pathname === '/'}
           />
           <NavItem
             icon={<PieChart className="h-5 w-5" />}
             label="Analytics"
             href="/analytics"
+            active={window.location.pathname === '/analytics'}
           />
           <NavItem
             icon={<Users className="h-5 w-5" />}

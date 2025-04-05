@@ -48,6 +48,24 @@ export function ThemeProvider({
     root.classList.add(theme);
   }, [theme]);
 
+  // This effect will handle system theme changes while the app is running
+  useEffect(() => {
+    if (theme !== 'system') return;
+    
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    
+    const handleChange = () => {
+      const root = window.document.documentElement;
+      const systemTheme = mediaQuery.matches ? 'dark' : 'light';
+      
+      root.classList.remove('light', 'dark');
+      root.classList.add(systemTheme);
+    };
+    
+    mediaQuery.addEventListener('change', handleChange);
+    return () => mediaQuery.removeEventListener('change', handleChange);
+  }, [theme]);
+
   const value = {
     theme,
     setTheme: (theme: Theme) => {

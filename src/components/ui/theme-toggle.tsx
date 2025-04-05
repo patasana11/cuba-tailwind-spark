@@ -26,7 +26,7 @@ const ThemeToggle = () => {
         </Button>
       </TooltipTrigger>
       <TooltipContent>
-        <p>Toggle {theme === 'dark' ? 'light' : 'dark'} mode</p>
+        <p>Toggle to {theme === 'dark' ? 'light' : 'dark'} mode</p>
       </TooltipContent>
     </Tooltip>
   );
